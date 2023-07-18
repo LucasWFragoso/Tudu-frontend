@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {faArrowUp} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-welcome-page',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent {
-
+ faArrowUp = faArrowUp;
 }
