@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {faArrowUp} from '@fortawesome/free-solid-svg-icons'
+import {faArrowUp, faMinus} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-welcome-page',
@@ -7,11 +7,16 @@ import {faArrowUp} from '@fortawesome/free-solid-svg-icons'
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent {
- faArrowUp = faArrowUp;
 
- isOpen = false;
+  faArrowUp = faArrowUp;
+  isOpen: boolean = false;
 
- toggleDropdown() {
-   this.isOpen = !this.isOpen;
- }
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      this.faArrowUp = faMinus;
+    } else {
+      this.faArrowUp = faArrowUp;
+    }
+  }
 }
