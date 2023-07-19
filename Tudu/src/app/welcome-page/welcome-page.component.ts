@@ -8,4 +8,10 @@ import {faArrowUp} from '@fortawesome/free-solid-svg-icons'
 })
 export class WelcomePageComponent {
  faArrowUp = faArrowUp;
+
+ isOpen = false;
+
+ toggleDropdown() {
+   this.isOpen = !this.isOpen;
+ }
 }
