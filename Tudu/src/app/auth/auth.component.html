@@ -1,0 +1,28 @@
+<div>
+    <h1>{{title}}</h1>
+    <div>
+      <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <fieldset [disabled]="isSubmiting">
+          <!-- <fieldset>
+            <input type="text" *ngIf="authType === 'register'" formControlName="name" placeholder="nome"
+              class="form-control form-control-lg">
+          </fieldset> -->
+          <fieldset>
+            <input type="text" formControlName="email" placeholder="E-mail" class="form-control form-control-lg">
+          </fieldset>
+          <fieldset>
+            <input type="text" formControlName="password" placeholder="Senha" class="form-control form-control-lg">
+          </fieldset>
+          <fieldset>
+            <input type="text" *ngIf="authType === 'register'" formControlName="password_confirmation"
+              placeholder="Repetir Senha" class="form-control form-control-lg">
+          </fieldset>
+          <button [disabled]="!authForm.valid" type="submit">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <p class="text-xs-center">
+      <span *ngIf="authType === 'register'" (click)="toggleForm()">Já tenho conta</span>
+      <span *ngIf="authType === 'login'" (click)="toggleForm()">Não tenho conta</span>
+    </p>
+  </div>

@@ -14,7 +14,7 @@ export class UserService {
 
   public isAuthenticated = this.currentUser.pipe(map((user) => !!user));
 
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://localhost:3000/';
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -26,8 +26,15 @@ export class UserService {
     email: string;
     password: string;
   }): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log('Request headers:', headers);
+    console.log('Data being sent in the login request:', data);
     return this.httpClient
-    .post<{ user: User }>("auth/sign_in", { user: data }, { observe: 'response' })
+    .post<{ user: User }>(
+      `${this.apiUrl}auth/sign_in`,
+      { user: data },
+      { headers, observe: 'response' }
+    )
     .pipe(
       tap(response => {
         const user: User | undefined = response.body?.user;
@@ -37,17 +44,24 @@ export class UserService {
           user.token = token;
           this.setAuth(user);
         }
+        console.log('Login response:', response);
       })
     );
   }
 
   register(data: {
-    username: string;
     email: string;
     password: string;
+    password_confirmation: string;
   }): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
     return this.httpClient
-    .post<{ user: User }>("auth", { user: data }, { observe: 'response' })
+    .post<{ user: User }>(
+      `${this.apiUrl}auth`,
+      { user: data },
+      { headers, observe: 'response' }
+    )
     .pipe(
       tap(response => {
         const user: User | undefined = response.body?.user;
